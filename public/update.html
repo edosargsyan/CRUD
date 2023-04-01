@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="save(); return false;">
+        <input type="text" placeholder='name' name="name" class="name"/>
+        <input type="text" placeholder='email'name='email' class="email"/>
+        <input type="text" placeholder='password'name="password" class="password"/>
+        <input type="text" placeholder='id' class="id" name='id'/>
+        <button type="submit">Save</button>
+    </form>
+    
+    <script>
+        function save(){
+        const name = document.querySelector('.name').value
+        const email = document.querySelector('.email').value
+        const password = document.querySelector('.password').value
+        const id = document.querySelector('.id').value
+
+        fetch(`/events/${id}`,{
+            method:"PUT",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                name,
+                email,
+                password,
+                id
+            })  
+        })
+        .then(resp=> console.log('yes'))
+            .catch(err=>console.log(err))
+        }
+    </script>
+</body>
+</html>
